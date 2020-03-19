@@ -11,10 +11,21 @@
 
   <body>
     <div class="page">
-      <partial src="_header.html" label="Header"></partial>
-      <partial src="_main.html" label="Main"></partial>
-      <partial src="_footer.html" label="Footer"></partial>
+      <header class="header">
+        <h1 class="title">Buscador de series</h1>
+        <input id="series-name" type="text" name="series-name">
+        <button type="button" class="search-button">Search</button>
+      </header>
+      <main class="main-content-container">
+        <section class="favourite-series">
+          <ul class="favourites-list"></ul>
+        </section>
+        <section class="consulted-series">
+          <ul class="consulted-list"></ul>
+        </section>
+      </main>
     </div>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
   </body>
 
 </html>
