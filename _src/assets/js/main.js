@@ -7,9 +7,13 @@ const consultedSeries = document.querySelector('.consulted-list');
 
 let series = [];
 let favSeries = [];
-let inputElem = null;
 
+let inputElem = null;
 const urlBase =  "http://api.tvmaze.com/search/shows?q=";
+
+let defaultImage = "https://via.placeholder.com/210x295";
+
+ let singleSerie = null;
 
 function buttonHandler(){
     getSeries();
@@ -29,17 +33,48 @@ function getSeries() {
   }
 
   function paintResult(arr) {
+    
+    consultedSeries.innerHTML = '';
+
     for (let item of arr) {
 
-     consultedSeries.innerHTML = `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${item.show.image.medium}></li>`;
+      if (item.show.image === null) {
+
+        consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${defaultImage}></li>`;
+
+      } else {
+     consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${item.show.image.medium}></li>`;
 
     }
-
-     if (item.show.image === null) {
-
-        item.show.image.medium = "https://via.placeholder.com/210x295";
-            
   }
-  }
+  addListeners(series);
+}
+
+function addListeners() {
+
+const listOfSeries = document.querySelectorAll('.list-item');
+
+for (let singleSerie of listOfSeries) {
+
+singleSerie.addEventListener('click', addToFavourite);
+
+}
+}
+
+function addToFavourite(event) {
+
+  // console.log(event.currentTarget);
+
+let chooseFav = event.currentTarget;
+
+favSeries.push(chooseFav);
+
+chooseFav.classList.toggle('red');
+
+// console.log(favSeries);
+
+}
+
+
 
 searchButton.addEventListener('click', buttonHandler);
