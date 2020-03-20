@@ -12,8 +12,8 @@ let inputElem = null;
 const urlBase =  "http://api.tvmaze.com/search/shows?q=";
 
 let defaultImage = "https://via.placeholder.com/210x295";
+let favId = null;
 
- let singleSerie = null;
 
 function buttonHandler(){
     getSeries();
@@ -27,7 +27,10 @@ function getSeries() {
       .then(response => response.json())
       .then(data => {
         series = data;
+
         paintResult(series);
+    
+        paintFavs(favSeries);
         
       });
   }
@@ -63,18 +66,73 @@ singleSerie.addEventListener('click', addToFavourite);
 
 function addToFavourite(event) {
 
-  // console.log(event.currentTarget);
-
 let chooseFav = event.currentTarget;
-
-favSeries.push(chooseFav);
 
 chooseFav.classList.toggle('red');
 
-// console.log(favSeries);
+let favId = parseInt(event.currentTarget.id);
+
+favSeries.push(favId);
+
+// setLocalStorage(favSeries);
+
+paintFavs(favSeries);
+
 
 }
 
+// function setLocalStorage(favSeries){
+
+//   localStorage.setItem('favSeries',JSON.stringify(favSeries));
+
+// }
+
+// function readLocalStorage(){
+
+//   let favSeries = JSON.parse(localStorage.getItem('favSeries'));
+  
+//   if(favSeries !== null){
+//     return favSeries;
+//   }
+  
+//   return favSeries = [];
+// }
+
+function getObjectById(favId){
+
+  for(let serie of series){
+
+    if(serie.show.id === favId) {
+
+      return serie;
+      
+    }
+
+  }
+ 
+}
+
+function paintFavs(favSeries){
+
+
+  listOfFavs.innerHTML = '';
+
+  for(let favSerie of favSeries) {
+
+    let serie = getObjectById(favSerie);
+
+    if (serie){
+
+      listOfFavs.innerHTML += `<li class="list-item" id=${serie.show.id}><img src=${serie.show.image.medium}><p class="main-title">${serie.show.name}</p></li>`;
+    }
+  }
+
+}
+
+//relacionar el toggle con el id (no el chooseFav), para que cuando la peli se pinte de favorita, se pinte en la lista.
+//y si se quita el rojo, se borra de la lista.
+// que los favoritos no se duplique.
+  
 
 
 searchButton.addEventListener('click', buttonHandler);
