@@ -28,6 +28,22 @@ height: 100vh;
 display: flex;
 flex-direction: column;
 padding-left: 50px;
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.subtitle{
+padding-bottom: 30px;
+
+}
+img{
+    width: 100px;
+}
+.main-title{
+
+    padding-left: 30px;
+}
 
 }
 .consulted-series {

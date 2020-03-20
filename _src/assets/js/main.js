@@ -123,7 +123,7 @@ function paintFavs(favSeries){
 
     if (serie){
 
-      listOfFavs.innerHTML += `<li class="list-item" id=${serie.show.id}><img src=${serie.show.image.medium}><p class="main-title">${serie.show.name}</p></li>`;
+      listOfFavs.innerHTML += `<li class="list-item" id=${serie.show.id}><div class="container"><img src=${serie.show.image.medium}><p class="main-title">${serie.show.name}</p></div></li>`;
     }
   }
 
