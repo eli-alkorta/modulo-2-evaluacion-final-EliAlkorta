@@ -6,7 +6,7 @@ const listOfFavs = document.querySelector('.favourites-list');
 const consultedSeries = document.querySelector('.consulted-list');
 
 let series = [];
-let favSeries = [];
+let favSeries = readLocalStorage();
 let favsIdList = [];
 
 let inputElem = null;
@@ -14,6 +14,7 @@ const urlBase =  "http://api.tvmaze.com/search/shows?q=";
 
 let defaultImage = "https://via.placeholder.com/210x295";
 let favId = null;
+
 
 
 function buttonHandler(){
@@ -100,7 +101,6 @@ function getObjectById(favId){
 
       setLocalStorage(favSeries);
 
-      // readLocalStorage(favSeries);
 
       paintFavs(favSeries);
 
@@ -115,22 +115,23 @@ function setLocalStorage(favSeries){
 
 }
 
-// function readLocalStorage(){
+function readLocalStorage(){
 
-//   let favSeries = JSON.parse(localStorage.getItem('favSeries'));
+  let favSeries = JSON.parse(localStorage.getItem('favSeries'));
   
-//   if(favSeries !== null){
-//     return favSeries;
-//   }
+  if(favSeries !== null){
+    return favSeries;
+  }
   
-//   return favSeries = [];
-// }
+  return favSeries = [];
+}
 
 
 
 function paintFavs(favSeries){
 
   listOfFavs.innerHTML = '';
+
 
   for(let favSerie of favSeries) {
 
@@ -147,9 +148,9 @@ function paintFavs(favSeries){
 }
 
 
-//Falta incluir el Readlocalstorage para rescatar los objetos y repintarlos. 
-//Cuando la web recargue, que se vean los favoritos.
+//Falta que, al recargar, se vean los favoritos (sin necesidad de clickar).
   
 
 
 searchButton.addEventListener('click', buttonHandler);
+window.addEventListener('load', readLocalStorage);
