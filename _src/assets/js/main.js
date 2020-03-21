@@ -17,12 +17,6 @@ let favId = null;
 
 
 
-function buttonHandler(){
-    getSeries();
-
-}
-
-
 function getSeries() {
     inputElem = inputSearchSeries.value;
     fetch(`${urlBase}${inputElem}`)
@@ -137,20 +131,44 @@ function paintFavs(favSeries){
 
   if (favSerie.show.image === null) {
 
-    listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${defaultImage}><p class="main-title">${favSerie.show.name}</p></div></li>`;
+    listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${defaultImage}><button type="button" class="erase-button">X</button><p class="main-title">${favSerie.show.name}</p></div></li>`;
 
   } else {
 
-      listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${favSerie.show.image.medium}><p class="main-title">${favSerie.show.name}</p></div></li>`;
+      listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${favSerie.show.image.medium}><button type="button" class="erase-button">X</button><p class="main-title">${favSerie.show.name}</p></div></li>`;
   
   }
   }
+  eraseFavListeners(favSeries);
 }
 
+function eraseFavListeners() {
 
-//Falta que, al recargar, se vean los favoritos (sin necesidad de clickar).
+  const listOfFavourites = document.querySelectorAll('.container');
+
+  for (let favourite of listOfFavourites) {
   
+  favourite.addEventListener('click', eraseFav);
+  
+  }
+}
+function eraseFav(event) {
+
+let itemId = parseInt(event.currentTarget.parentElement.id);
+
+const itemIndex = favSeries.indexOf(itemId);
+
+favSeries.splice(itemIndex,1);
+
+setLocalStorage();
+
+paintFavs(favSeries);
+
+console.log(favSeries);
+
+  }
 
 
-searchButton.addEventListener('click', buttonHandler);
+ 
 window.addEventListener('load', readLocalStorage);
+searchButton.addEventListener('click', getSeries);
