@@ -7,6 +7,7 @@ const consultedSeries = document.querySelector('.consulted-list');
 
 let series = [];
 let favSeries = [];
+let favsIdList = [];
 
 let inputElem = null;
 const urlBase =  "http://api.tvmaze.com/search/shows?q=";
@@ -68,24 +69,51 @@ function addToFavourite(event) {
 
 let chooseFav = event.currentTarget;
 
-chooseFav.classList.toggle('red');
+chooseFav.classList.add('red');
 
 let favId = parseInt(event.currentTarget.id);
 
-favSeries.push(favId);
+if(favsIdList.indexOf(favId) === -1) {
 
-// setLocalStorage(favSeries);
+  favsIdList.push(favId);
 
-paintFavs(favSeries);
+  getObjectById(favId);
+ 
 
+} else {
+
+favsIdList.splice(favId, 1);
 
 }
+}
+function getObjectById(favId){
 
-// function setLocalStorage(favSeries){
+  for(let serie of series){
 
-//   localStorage.setItem('favSeries',JSON.stringify(favSeries));
+    if(serie.show.id === favId) {
 
-// }
+      let object = serie;
+
+      favSeries.push(object);
+
+      console.log(favSeries);
+
+      setLocalStorage(favSeries);
+
+      // readLocalStorage(favSeries);
+
+      paintFavs(favSeries);
+
+  }
+}
+}
+
+
+function setLocalStorage(favSeries){
+
+  localStorage.setItem('favSeries',JSON.stringify(favSeries));
+
+}
 
 // function readLocalStorage(){
 
@@ -98,40 +126,29 @@ paintFavs(favSeries);
 //   return favSeries = [];
 // }
 
-function getObjectById(favId){
 
-  for(let serie of series){
-
-    if(serie.show.id === favId) {
-
-      return serie;
-      
-    }
-
-  }
- 
-}
 
 function paintFavs(favSeries){
-
 
   listOfFavs.innerHTML = '';
 
   for(let favSerie of favSeries) {
 
-    let serie = getObjectById(favSerie);
+  if (favSerie.show.image === null) {
 
-    if (serie){
+    listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${defaultImage}><p class="main-title">${favSerie.show.name}</p></div></li>`;
 
-      listOfFavs.innerHTML += `<li class="list-item" id=${serie.show.id}><div class="container"><img src=${serie.show.image.medium}><p class="main-title">${serie.show.name}</p></div></li>`;
-    }
+  } else {
+
+      listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${favSerie.show.image.medium}><p class="main-title">${favSerie.show.name}</p></div></li>`;
+  
   }
-
+  }
 }
 
-//relacionar el toggle con el id (no el chooseFav), para que cuando la peli se pinte de favorita, se pinte en la lista.
-//y si se quita el rojo, se borra de la lista.
-// que los favoritos no se duplique.
+
+//Falta incluir el Readlocalstorage para rescatar los objetos y repintarlos. 
+//Cuando la web recargue, que se vean los favoritos.
   
 
 
