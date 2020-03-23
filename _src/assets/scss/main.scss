@@ -4,14 +4,19 @@
   padding: 0;
   list-style-type: none;
 }
+.page {
+  background: rgba(234, 137, 154, 0.3);
+}
 
 .header {
   margin-left: 50px;
+  margin-bottom: 40px;
 }
 
 .title {
   padding-top: 50px;
   padding-bottom: 50px;
+  font-family: "roboto";
 }
 .main-content-container {
   width: 100%;
@@ -23,17 +28,20 @@
 .favourite-series {
   padding-top: 50px;
   width: 30%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding-left: 50px;
+  background: rgba(234, 137, 154, 0.3);
   .container {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
+
   .subtitle {
     padding-bottom: 30px;
+    font-family: "roboto";
   }
   img {
     width: 100px;
@@ -44,20 +52,23 @@
   }
   .main-title {
     padding-left: 10px;
+    font-family: "roboto";
   }
 }
 .consulted-series {
   padding-top: 50px;
   width: 70%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(173, 216, 230, 0.3);
 }
 .main-title {
   margin-top: 20px;
   margin-bottom: 20px;
+  font-family: "roboto";
 }
-.red {
-  background: red;
+.purple {
+  background: rgb(125, 33, 129);
 }

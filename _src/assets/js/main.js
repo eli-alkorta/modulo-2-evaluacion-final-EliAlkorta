@@ -57,7 +57,7 @@ function addToFavouriteHandler() {
 function addToFavourite(event) {
   let chooseFav = event.currentTarget;
 
-  chooseFav.classList.add("red");
+  chooseFav.classList.add("purple");
 
   let favId = parseInt(event.currentTarget.id);
 
