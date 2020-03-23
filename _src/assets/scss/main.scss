@@ -1,69 +1,63 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 
 .header {
-    margin-left: 50px;
-    
+  margin-left: 50px;
 }
 
 .title {
-    padding-top: 50px;
-    padding-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .main-content-container {
-width: 100%;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .favourite-series {
-padding-top: 50px;    
-width: 30%;
-height: 100vh;
-display: flex;
-flex-direction: column;
-padding-left: 50px;
-.container{
+  padding-top: 50px;
+  width: 30%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  .container {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-.subtitle{
-padding-bottom: 30px;
-
-}
-img{
+  }
+  .subtitle {
+    padding-bottom: 30px;
+  }
+  img {
     width: 100px;
     padding-bottom: 20px;
-}
-.erase-button{
+  }
+  .erase-button {
     margin-left: 20px;
-}
-.main-title{
-
+  }
+  .main-title {
     padding-left: 10px;
-}
-
+  }
 }
 .consulted-series {
-padding-top: 50px;
-width: 70%;
-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-
+  padding-top: 50px;
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.main-title{
-margin-top: 20px;
-margin-bottom: 20px;
-
+.main-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.red{
-    background: red;
+.red {
+  background: red;
 }

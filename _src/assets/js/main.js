@@ -1,174 +1,137 @@
-'use strict';
+"use strict";
 
-const inputSearchSeries = document.querySelector('#series-name');
-const searchButton = document.querySelector('.search-button');
-const listOfFavs = document.querySelector('.favourites-list');
-const consultedSeries = document.querySelector('.consulted-list');
+const inputSearchSeries = document.querySelector("#series-name");
+const searchButton = document.querySelector(".search-button");
+const listOfFavs = document.querySelector(".favourites-list");
+const consultedSeries = document.querySelector(".consulted-list");
 
 let series = [];
 let favSeries = readLocalStorage();
 let favsIdList = [];
 
 let inputElem = null;
-const urlBase =  "http://api.tvmaze.com/search/shows?q=";
+const urlBase = "http://api.tvmaze.com/search/shows?q=";
 
 let defaultImage = "https://via.placeholder.com/210x295";
 let favId = null;
 
-
-
 function getSeries() {
-    inputElem = inputSearchSeries.value;
-    fetch(`${urlBase}${inputElem}`)
-      .then(response => response.json())
-      .then(data => {
-        series = data;
+  inputElem = inputSearchSeries.value;
+  fetch(`${urlBase}${inputElem}`)
+    .then(response => response.json())
+    .then(data => {
+      series = data;
 
-        paintResult(series);
-    
-        paintFavs(favSeries);
-        
-      });
-  }
+      paintResult(series);
 
-  function paintResult(arr) {
-    
-    consultedSeries.innerHTML = '';
+      paintFavs(favSeries);
+    });
+}
 
-    for (let item of arr) {
+function paintResult(arr) {
+  consultedSeries.innerHTML = "";
 
-      if (item.show.image === null) {
-
-        consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${defaultImage}></li>`;
-
-      } else {
-     consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${item.show.image.medium}></li>`;
-
+  for (let item of arr) {
+    if (item.show.image === null) {
+      consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${defaultImage}></li>`;
+    } else {
+      consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${item.show.image.medium}></li>`;
     }
   }
   addListeners(series);
 }
 
 function addListeners() {
+  const listOfSeries = document.querySelectorAll(".list-item");
 
-const listOfSeries = document.querySelectorAll('.list-item');
-
-for (let singleSerie of listOfSeries) {
-
-singleSerie.addEventListener('click', addToFavourite);
-
+  for (let singleSerie of listOfSeries) {
+    singleSerie.addEventListener("click", addToFavouriteHandler);
+  }
 }
+
+function addToFavouriteHandler() {
+  addToFavourite(event);
+  getObjectById(favId);
 }
 
 function addToFavourite(event) {
+  let chooseFav = event.currentTarget;
 
-let chooseFav = event.currentTarget;
+  chooseFav.classList.add("red");
 
-chooseFav.classList.add('red');
+  let favId = parseInt(event.currentTarget.id);
 
-let favId = parseInt(event.currentTarget.id);
+  if (favsIdList.indexOf(favId) === -1) {
+    favsIdList.push(favId);
 
-if(favsIdList.indexOf(favId) === -1) {
-
-  favsIdList.push(favId);
-
-  getObjectById(favId);
- 
-
-} else {
-
-favsIdList.splice(favId, 1);
-
+    getObjectById(favId);
+  } else {
+    favsIdList.splice(favId, 1);
+  }
 }
-}
-function getObjectById(favId){
-
-  for(let serie of series){
-
-    if(serie.show.id === favId) {
-
+function getObjectById(favId) {
+  for (let serie of series) {
+    if (serie.show.id === favId) {
       let object = serie;
 
       favSeries.push(object);
 
-      console.log(favSeries);
-
       setLocalStorage(favSeries);
 
-
       paintFavs(favSeries);
-
+    }
   }
 }
+
+function setLocalStorage(favSeries) {
+  localStorage.setItem("favSeries", JSON.stringify(favSeries));
 }
 
+function readLocalStorage() {
+  let favSeries = JSON.parse(localStorage.getItem("favSeries"));
 
-function setLocalStorage(favSeries){
-
-  localStorage.setItem('favSeries',JSON.stringify(favSeries));
-
-}
-
-function readLocalStorage(){
-
-  let favSeries = JSON.parse(localStorage.getItem('favSeries'));
-  
-  if(favSeries !== null){
+  if (favSeries !== null) {
     return favSeries;
   }
-  
-  return favSeries = [];
+
+  return (favSeries = []);
 }
 
+function paintFavs(favSeries) {
+  listOfFavs.innerHTML = "";
 
-
-function paintFavs(favSeries){
-
-  listOfFavs.innerHTML = '';
-
-
-  for(let favSerie of favSeries) {
-
-  if (favSerie.show.image === null) {
-
-    listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${defaultImage}><button type="button" class="erase-button">X</button><p class="main-title">${favSerie.show.name}</p></div></li>`;
-
-  } else {
-
+  for (let favSerie of favSeries) {
+    if (favSerie.show.image === null) {
+      listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${defaultImage}><button type="button" class="erase-button">X</button><p class="main-title">${favSerie.show.name}</p></div></li>`;
+    } else {
       listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${favSerie.show.image.medium}><button type="button" class="erase-button">X</button><p class="main-title">${favSerie.show.name}</p></div></li>`;
-  
-  }
+    }
   }
   eraseFavListeners(favSeries);
 }
 
 function eraseFavListeners() {
-
-  const listOfFavourites = document.querySelectorAll('.container');
+  const listOfFavourites = document.querySelectorAll(".container");
 
   for (let favourite of listOfFavourites) {
-  
-  favourite.addEventListener('click', eraseFav);
-  
+    favourite.addEventListener("click", eraseFav);
   }
 }
 function eraseFav(event) {
+  let itemId = parseInt(event.currentTarget.parentElement.id);
 
-let itemId = parseInt(event.currentTarget.parentElement.id);
+  const itemIndex = favSeries.indexOf(itemId);
 
-const itemIndex = favSeries.indexOf(itemId);
+  favSeries.splice(itemIndex, 1);
 
-favSeries.splice(itemIndex,1);
+  setLocalStorage(favSeries);
 
-setLocalStorage();
+  paintFavs(favSeries);
+}
 
-paintFavs(favSeries);
+function init() {
+  paintFavs(favSeries);
+}
 
-console.log(favSeries);
-
-  }
-
-
- 
-window.addEventListener('load', readLocalStorage);
-searchButton.addEventListener('click', getSeries);
+window.addEventListener("load", init);
+searchButton.addEventListener("click", getSeries);
