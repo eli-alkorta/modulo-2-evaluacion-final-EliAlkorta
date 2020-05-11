@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adalab Examen Javascript - Eli Alkorta</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adalab Examen Javascript - Eli Alkorta</title>
+  <link
+  href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+  rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+</head>
 
-  <body>
-    <div class="page">
-      <header class="header">
-        <h1 class="title">Buscador de series</h1>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1 class="title">Buscador de series</h1>
+      <div class="input-container">
         <input id="series-name" type="text" name="series-name" />
         <button type="button" class="search-button">Search</button>
-      </header>
-      <main class="main-content-container">
-        <section class="favourite-series">
-          <h2 class="subtitle">Mis series favoritas:</h2>
-          <ul class="favourites-list"></ul>
-        </section>
-        <section class="consulted-series">
-          <ul class="consulted-list"></ul>
-        </section>
-      </main>
-    </div>
-    <script type="text/javascript" src="./assets/js/main.js"></script>
-  </body>
+      </div>
+    </header>
+    <main class="main-content-container">
+      
+      <section class="favourite-series">
+        <h2 class="subtitle">Mis series favoritas:</h2>
+        <button type="button" class="deleteAllButton">BORRAR TODAS</button>
+        <ul class="favourites-list"></ul>
+      </section>
+      <section class="consulted-series">
+        <ul class="consulted-list"></ul>
+      </section>
+    </main>
+  </div>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+</body>
 </html>
