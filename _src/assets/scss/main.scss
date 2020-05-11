@@ -5,7 +5,7 @@
   list-style-type: none;
 }
 .page {
-  background: rgba(234, 137, 154, 0.3);
+  background: green;
 }
 
 .header {
@@ -17,6 +17,36 @@
   padding-top: 50px;
   padding-bottom: 50px;
   font-family: "roboto";
+  font-size: 80px;
+  text-align: center;
+}
+.input-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  #series-name{
+    width: 250px;
+    padding: 2px;
+    font-family: "roboto";
+    font-size: 18px;
+    font-weight: bold;
+    &:focus{
+      border-color: black;
+    }
+  }
+  .search-button{
+    font-family: "roboto";
+    font-size: 20px;
+    font-weight: bold;
+    width: 70px;
+    margin-left: 20px;
+    padding: 3px;
+    border-radius: 25%;
+    &:focus{
+      border: solid 2px black;
+    }
+  }
+  
 }
 .main-content-container {
   width: 100%;
@@ -26,6 +56,18 @@
 }
 
 .favourite-series {
+  .deleteAllButton{
+    margin-bottom: 30px;
+    margin-right: 20px;
+    padding: 10px;
+    width: 78px;
+    border-radius: 70%;
+    border-style: solid;
+    border-color: black;
+    background-color: red;
+    align-self: flex-end;
+    
+  }
   padding-top: 50px;
   width: 30%;
   height: 100%;
@@ -38,9 +80,9 @@
     flex-direction: row;
     align-items: center;
   }
-
+  
   .subtitle {
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     font-family: "roboto";
   }
   img {
@@ -49,10 +91,15 @@
   }
   .erase-button {
     margin-left: 20px;
+    border: solid 2px black;
+    padding: 2px;
+    font-family: "roboto";
+    font-size: 18px;
   }
   .main-title {
     padding-left: 10px;
     font-family: "roboto";
+    font-weight: bold;
   }
 }
 .consulted-series {
@@ -68,7 +115,14 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-family: "roboto";
+  font-size: 18px;
+  font-weight: bold;
 }
-.purple {
-  background: rgb(125, 33, 129);
+.red {
+  background:red;
+  padding-right: 25px;
+  padding-left: 25px;
+  border-radius: 10%;
+  padding-bottom: 5px;
 }
+
