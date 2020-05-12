@@ -3,8 +3,6 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
-}
-.page {
   background: green;
 }
 
@@ -19,6 +17,7 @@
   font-family: "roboto";
   font-size: 80px;
   text-align: center;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 .input-container{
   display: flex;
@@ -32,6 +31,7 @@
     font-weight: bold;
     &:focus{
       border-color: black;
+      background: white;
     }
   }
   .search-button{
@@ -44,6 +44,8 @@
     border-radius: 25%;
     &:focus{
       border: solid 2px black;
+      color: white;
+      background: black;
     }
   }
   
@@ -66,7 +68,9 @@
     border-color: black;
     background-color: red;
     align-self: flex-end;
-    
+    &.hidden{
+      display: none;
+    }
   }
   padding-top: 50px;
   width: 30%;
@@ -74,7 +78,8 @@
   display: flex;
   flex-direction: column;
   padding-left: 50px;
-  background: rgba(234, 137, 154, 0.3);
+  background: yellow;
+ 
   .container {
     display: flex;
     flex-direction: row;
@@ -82,12 +87,18 @@
   }
   
   .subtitle {
-    padding-bottom: 40px;
+    padding-bottom: 30px;
     font-family: "roboto";
+    background: yellow;
+    font-size: 26px;
+  }
+  .container{
+    background: yellow;
   }
   img {
-    width: 100px;
+    width: 120px;
     padding-bottom: 20px;
+    background: yellow;
   }
   .erase-button {
     margin-left: 20px;
@@ -100,29 +111,44 @@
     padding-left: 10px;
     font-family: "roboto";
     font-weight: bold;
+    background: yellow;
   }
 }
 .consulted-series {
+  background: rgb(11, 102, 35);
   padding-top: 50px;
   width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(173, 216, 230, 0.3);
 }
-.main-title {
-  margin-top: 20px;
+.consulted-list{
+  background: rgb(11, 102, 35);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.list-item1{
+  background: rgb(11, 102, 35);
+  margin-right: 40px;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+.main-title1 {
   margin-bottom: 20px;
   font-family: "roboto";
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
+  background: transparent;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .red {
   background:red;
-  padding-right: 25px;
-  padding-left: 25px;
-  border-radius: 10%;
-  padding-bottom: 5px;
+  border-radius: 7%;
+  padding-bottom: 15px;
 }
 

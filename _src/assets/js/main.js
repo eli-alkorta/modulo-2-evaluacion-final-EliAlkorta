@@ -34,16 +34,16 @@ function paintResult(arr) {
   
   for (let item of arr) {
     if (item.show.image === null) {
-      consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${defaultImage}></li>`;
+      consultedSeries.innerHTML += `<li class="list-item1" id=${item.show.id}><p class="main-title1">${item.show.name}</p><img src=${defaultImage}></li>`;
     } else {
-      consultedSeries.innerHTML += `<li class="list-item" id=${item.show.id}><p class="main-title">${item.show.name}</p><img src=${item.show.image.medium}></li>`;
+      consultedSeries.innerHTML += `<li class="list-item1" id=${item.show.id}><p class="main-title1">${item.show.name}</p><img src=${item.show.image.medium}></li>`;
     }
   }
   addListeners(series);
 }
 
 function addListeners() {
-  const listOfSeries = document.querySelectorAll(".list-item");
+  const listOfSeries = document.querySelectorAll(".list-item1");
   
   for (let singleSerie of listOfSeries) {
     singleSerie.addEventListener("click", addToFavouriteHandler);
@@ -108,6 +108,11 @@ function paintFavs(favSeries) {
     } else {
       listOfFavs.innerHTML += `<li class="list-item" id=${favSerie.show.id}><div class="container"><img src=${favSerie.show.image.medium}><button type="button" class="erase-button">X</button><p class="main-title">${favSerie.show.name}</p></div></li>`;
     }
+  }
+  if (listOfFavs.innerHTML === ''){
+    deleteAll.classList.add('hidden');
+  }else{
+    deleteAll.classList.remove('hidden');
   }
   eraseFavListeners(favSeries);
 }
